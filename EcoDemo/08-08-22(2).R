@@ -31,6 +31,7 @@ So, our new price is Rs. 5128.205 on food per month in 2005
 
 I1995=c(212.45,328.06,345.89,173.41,201.35)
 w=c(65.3,4.8,8.5,7.6,13.8)
+D=data.frame(Groupindex=I1995,Weight = w)
 #(a):
 CLI1995=weighted.mean(I1995,w);CLI1995
 
@@ -38,13 +39,19 @@ CLI1995=weighted.mean(I1995,w);CLI1995
 100/CLI1995;
 
 #(c):
-#1981: 24 units are bought by 2400
-#1995: 24 units are bought by CLI1995*2400/100
-CLI1995*2400/100
+
+#1981: 24 units are bought by 2400 (His salary bought 24 items)
+#1995: 24 units are bought by CLI1995*2400/100 (24 items are bought now)
+Change = CLI1995*2400/100;Change
 #His salary is 4950 < 5396.228
 
+
 #(d):
-#Given: expenditure 
+#Expenditure in each group buying as same as 1981 wrt the need of the question:
+exp = (Change/sum(w))*w;exp
+exp[length(exp)] = 4950 - sum(exp[-length(exp)])
+NewWt = exp/(sum(exp))*100
+D$NewWeight = NewWt
 
-
+View(D)
 			
